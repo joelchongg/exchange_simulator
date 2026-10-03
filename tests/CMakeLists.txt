@@ -9,7 +9,7 @@ FetchContent_MakeAvailable(googletest)
 
 include(GoogleTest)
 
-add_executable(exsim_core_tests
-    core/version_test.cpp)
-target_link_libraries(exsim_core_tests PRIVATE exsim::core exsim::options GTest::gtest_main)
-gtest_discover_tests(exsim_core_tests DISCOVERY_MODE PRE_TEST)
+add_executable(exsim_utils_tests
+    utils/seqlock_queue_test.cpp)
+target_link_libraries(exsim_utils_tests PRIVATE exsim::utils exsim::options GTest::gtest_main)
+gtest_discover_tests(exsim_utils_tests DISCOVERY_MODE PRE_TEST)

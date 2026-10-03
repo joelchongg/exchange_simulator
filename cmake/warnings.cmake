@@ -15,11 +15,15 @@ function(exsim_set_warnings target)
         -Wcast-align
         -Wformat=2)
 
+    # -Wno-interference-size: GCC warns that std::hardware_*_interference_size
+    # can vary with -mtune. Everything here is built together with the same
+    # flags, so the value cannot differ across translation units.
     set(gcc_only
         -Wuseless-cast
         -Wduplicated-cond
         -Wduplicated-branches
-        -Wlogical-op)
+        -Wlogical-op
+        -Wno-interference-size)
 
     target_compile_options(${target} INTERFACE
         ${common}

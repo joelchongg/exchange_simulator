@@ -32,19 +32,16 @@ if(EXSIM_NATIVE)
 endif()
 
 # ---- Libraries: one per component, include root is src/ ----
-
-add_library(exsim_core
-    src/exsim/core/version.cpp)
-add_library(exsim::core ALIAS exsim_core)
-target_include_directories(exsim_core PUBLIC src)
-target_compile_features(exsim_core PUBLIC cxx_std_23)
-target_link_libraries(exsim_core PRIVATE exsim::options)
+add_library(exsim_utils INTERFACE)
+add_library(exsim::utils ALIAS exsim_utils)
+target_include_directories(exsim_utils INTERFACE src)
+target_compile_features(exsim_utils INTERFACE cxx_std_23)
 
 # ---- Executables ----
 
 add_executable(exchange
     apps/exchange/main.cpp)
-target_link_libraries(exchange PRIVATE exsim::core exsim::options)
+target_link_libraries(exchange PRIVATE exsim::utils exsim::options)
 
 if(EXSIM_BUILD_TESTS)
     enable_testing()

@@ -1,7 +1,0 @@
-#include "exsim/core/version.hpp"
-
-namespace exsim {
-
-std::string_view version() noexcept { return "0.1.0"; }
-
-} // namespace exsim

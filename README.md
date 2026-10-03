@@ -21,8 +21,8 @@ ctest --preset debug          # run all tests
 Useful variations:
 
 ```sh
-ctest --preset debug -R Version                    # only tests whose name matches "Version"
-./build/debug/tests/exsim_core_tests --gtest_filter='Version.*'  # run one test binary directly
+ctest --preset debug -R SeqLockQueue                    # only tests whose name matches "Version"
+./build/debug/tests/exsim_core_tests --gtest_filter='SeqLockQueueStress.*'  # run one test binary directly
 cmake --preset debug -DEXSIM_WARNINGS_AS_ERRORS=ON  # build like CI does
 ```
 ## Development

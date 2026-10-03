@@ -14,7 +14,7 @@ jobs:
       matrix:
         compiler:
           - { name: gcc-14, cc: gcc-14, cxx: g++-14, packages: g++-14 }
-          - { name: clang-18, cc: clang-18, cxx: clang++-18, packages: clang-18 g++-14 }
+          - { name: clang-20, cc: clang-20, cxx: clang++-20, packages: clang-20 g++-14 }
         preset: [debug, asan, tsan, release]
     env:
       CC: ${{ matrix.compiler.cc }}
