@@ -188,6 +188,7 @@ TEST(SeqLockQueueStress, ConcurrentReadersNeverSeeTornOrReorderedData) {
     SeqLockQueue<Payload, kStressCapacity> q;
     std::atomic<bool> writer_done{false};
     std::atomic<int> readers_ready{0};
+    std::atomic<size_t> readers_with_data{0};
 
     std::atomic<uint64_t> torn{0};
     std::atomic<uint64_t> out_of_order{0};
@@ -216,6 +217,9 @@ TEST(SeqLockQueueStress, ConcurrentReadersNeverSeeTornOrReorderedData) {
                     if (seen_any && v <= last) {
                         out_of_order.fetch_add(1, std::memory_order_relaxed);
                     }
+                    if (!seen_any) {
+                        readers_with_data.fetch_add(1, std::memory_order_relaxed);
+                    }
                     last = v;
                     seen_any = true;
                     ++count;
@@ -235,9 +239,14 @@ TEST(SeqLockQueueStress, ConcurrentReadersNeverSeeTornOrReorderedData) {
     {
         auto writer = q.writer();
         Payload p{};
-        for (uint64_t i = 0; i < kMessages; ++i) {
+        for (uint64_t i = 0;
+             i < kMessages || readers_with_data.load(std::memory_order_relaxed) < kReaders;
+             ++i) {
             p.words.fill(i);
             writer.push(p);
+            if (i >= kMessages) {
+                std::this_thread::yield();
+            }
         }
     }
     writer_done.store(true, std::memory_order_release);
