@@ -21,8 +21,8 @@ ctest --preset debug          # run all tests
 Useful variations:
 
 ```sh
-ctest --preset debug -R Version                    # only tests whose name matches "Version"
-./build/debug/tests/exsim_core_tests --gtest_filter='Version.*'  # run one test binary directly
+ctest --preset debug -R SeqLockQueue                 # only tests whose name matches "SeqLockQueue"
+./build/debug/tests/exsim_utils_tests --gtest_filter='SeqLockQueueStress.*'  # run one test binary directly
 cmake --preset debug -DEXSIM_WARNINGS_AS_ERRORS=ON  # build like CI does
 ```
 ## Development
@@ -41,7 +41,7 @@ Example: adding a `book` component.
    target_include_directories(exsim_book PUBLIC src)
    target_compile_features(exsim_book PUBLIC cxx_std_23)
    target_link_libraries(exsim_book
-       PUBLIC exsim::core
+       PUBLIC exsim::utils
        PRIVATE exsim::options)
    ```
 

@@ -95,7 +95,7 @@ public:
 
 private:
     alignas(std::hardware_destructive_interference_size) std::atomic<uint64_t> writer_pos_;
-    alignas(std::hardware_constructive_interference_size) std::unique_ptr<Slot[]> buffer_;
+    alignas(std::hardware_destructive_interference_size) std::unique_ptr<Slot[]> buffer_;
     bool writer_created_;
 
     void push(const ElemType& elem, uint64_t& writer_gen) {

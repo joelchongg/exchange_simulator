@@ -19,7 +19,8 @@ function(exsim_set_warnings target)
         -Wuseless-cast
         -Wduplicated-cond
         -Wduplicated-branches
-        -Wlogical-op)
+        -Wlogical-op
+        -Wno-interference-size)
 
     target_compile_options(${target} INTERFACE
         ${common}
