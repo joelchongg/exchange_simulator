@@ -37,6 +37,11 @@ add_library(exsim::utils ALIAS exsim_utils)
 target_include_directories(exsim_utils INTERFACE src)
 target_compile_features(exsim_utils INTERFACE cxx_std_23)
 
+add_library(exsim_protocol INTERFACE)
+add_library(exsim::protocol ALIAS exsim_protocol)
+target_include_directories(exsim_protocol INTERFACE src)
+target_compile_features(exsim_protocol INTERFACE cxx_std_23)
+
 # ---- Executables ----
 
 add_executable(exchange

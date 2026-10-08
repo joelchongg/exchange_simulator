@@ -13,3 +13,8 @@ add_executable(exsim_utils_tests
     utils/seqlock_queue_test.cpp)
 target_link_libraries(exsim_utils_tests PRIVATE exsim::utils exsim::options GTest::gtest_main)
 gtest_discover_tests(exsim_utils_tests DISCOVERY_MODE PRE_TEST)
+
+add_executable(exsim_protocol_tests
+    protocol/protocol_layout_test.cpp)
+target_link_libraries(exsim_protocol_tests PRIVATE exsim::protocol exsim::options GTest::gtest_main)
+gtest_discover_tests(exsim_protocol_tests DISCOVERY_MODE PRE_TEST)
